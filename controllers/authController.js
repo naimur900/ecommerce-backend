@@ -20,7 +20,10 @@ const createUser = async (req,res)=>{
             const newUser = new User({
                 name: name,
                 email: email,
-                password: password
+                password: CryptoJS.AES.encrypt(
+                    password,
+                    process.env.SECRET,
+                ).toString()
             })
             newUser.save()
             res.status(201).json({
