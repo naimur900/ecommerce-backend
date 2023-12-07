@@ -10,7 +10,7 @@ const createUser = async (req,res)=>{
         })       
 
         if(user){
-            res.status(200).json({
+            res.status(409).json({
                 status:false,
                 message: "User already exist"
             });
@@ -25,7 +25,7 @@ const createUser = async (req,res)=>{
                     process.env.SECRET,
                 ).toString()
             })
-            newUser.save()
+            await newUser.save()
             res.status(201).json({
                 status:true,
                 message: "User created successfully"

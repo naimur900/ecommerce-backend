@@ -1,8 +1,9 @@
 const express = require('express');
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
-const authRouter = require('./routes/authRoute')
+const authRouter = require('./routes/authRouter')
 const bodyParser = require('body-parser');
+const productRoute = require("./routes/productRotue")
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ mongoose.connect(process.env.MONGOURI).then(()=>{
 
 // Routes
 app.use("/auth", authRouter)
+app.use("/products", productRoute)
 
 
 app.get("/",(req,res)=>{
